@@ -1,11 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
-import testBootstrap from '@/views/pages/testBootsrap.vue';
+import Login from '@/views/pages/auth/Login.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path:'/',
-        name:'',
-        component:testBootstrap
+        path:'/login',
+        name:'login',
+        component:Login
     }
     // {
     //   // path: '/about',

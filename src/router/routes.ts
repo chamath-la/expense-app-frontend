@@ -1,11 +1,17 @@
 import type { RouteRecordRaw } from 'vue-router';
-import Login from '@/views/pages/auth/Login.vue'
+import Login from '@/views/pages/auth/Login.vue';
+import Registration from '@/views/pages/auth/Registration.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path:'/login',
         name:'login',
         component:Login
+    },
+    {
+        path:'/register',
+        name:'register',
+        component:Registration
     }
     // {
     //   // path: '/about',

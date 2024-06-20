@@ -3,7 +3,7 @@
       <div class="card login-card">
         <div class="card-body">
           <h3 class="card-title text-center">Login</h3>
-          <div class="text-center text-danger">{{ errorMessage }}</div>
+            <ErrorMessage :message = errorMessage />
           <form @submit.prevent="handleLogin">
             <div class="mb-3">
               <label for="username" class="form-label">UserName</label>
@@ -13,7 +13,7 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" v-model="loginParams.password" >
             </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <SubmitButton text="Login" :SubmitData="SubmitData"/>
           </form>
           <p class="mt-3 text-center">
             Don't have an account?
@@ -27,8 +27,12 @@
     import {ref} from 'vue';
     import type { UserDetails } from '@/assets/types/UserDetails';
     import { UserModule} from '@/stores/UserModule';
+    import getErrorMessage from '@/utils/errorHandler';
+    import ErrorMessage from '@/components/Alerts/ErrorMessage.vue';
+    import SubmitButton from '@/components/Buttons/SubmitButton.vue';
 
     const UserStore = UserModule();
+    const SubmitData = ref<boolean>(false);
     const errorMessage = ref();
     const loginParams = ref<UserDetails>({'username':'','password':''});
    
@@ -37,13 +41,19 @@
     const handleLogin = async() =>
     {
         try{
+            SubmitData.value = true;
             UserStore.userDetails = loginParams.value
             let result:any = await UserStore.login();
             localStorage.setItem('token',result.data);
 
         }catch(error){
 
-            errorMessage.value = error;
+            errorMessage.value = getErrorMessage(error);
+            setTimeout(() => {
+              errorMessage.value = ''
+            }, 1000);
+        }finally{
+          SubmitData.value = false;
         }
        
     }

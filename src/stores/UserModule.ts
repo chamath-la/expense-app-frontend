@@ -14,7 +14,7 @@ export const UserModule = defineStore('UserModule', () => {
                 
                 if(response.data.status == 500)
                 {
-                    throw new Error('credentials not correct')
+                    throw new Error(response.data.message)
                 }
 
                 resolve(response.data);
@@ -28,6 +28,28 @@ export const UserModule = defineStore('UserModule', () => {
         })
   }
 
-  return { userDetails, login }
+  function register(){
+
+    return new Promise((resolve,reject)=>{
+            
+        instance.post('/api/register',userDetails.value).then((response)=>{
+            
+            if(response.data.status == 500)
+            {
+                throw new Error('error on registration')
+            }
+
+            resolve(response.data);
+
+        }).catch((response)=>{
+            
+            reject(response)
+           
+        });
+
+    })
+  }
+
+  return { userDetails, login, register }
 });
 

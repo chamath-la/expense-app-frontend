@@ -1,7 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
-
+import testBootstrap from '@/views/pages/testBootsrap.vue';
 
 const routes: Array<RouteRecordRaw> = [
+    {
+        path:'/',
+        name:'',
+        component:testBootstrap
+    }
     // {
     //   // path: '/about',
     //   // name: 'about',

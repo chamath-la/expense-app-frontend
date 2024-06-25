@@ -13,7 +13,7 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" v-model="loginParams.password" >
             </div>
-            <SubmitButton text="Login" :SubmitData="SubmitData"/>
+            <SubmitButton :SubmitData="SubmitData">Login</SubmitButton>
           </form>
           <p class="mt-3 text-center">
             Don't have an account?

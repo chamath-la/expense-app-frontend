@@ -1,6 +1,6 @@
 <template>
-    <div class="register-container">
-      <div class="card register-card">
+    <div class="register-container d-flex justify-content-center align-items-center w-100 h-100">
+      <div class="card register-card border-0">
         <div class="card-body">
           <h3 class="card-title text-center">Register</h3>
             <ErrorMessage :message = errorMessage />

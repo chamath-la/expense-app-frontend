@@ -21,7 +21,7 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" v-model="UserParams.password">
             </div>
-            <SubmitButton text="Register" :SubmitData="SubmitData"/>
+            <SubmitButton :SubmitData="SubmitData"> Register </SubmitButton>
           </form>
           <p class="mt-3 text-center">
             Already have an account?

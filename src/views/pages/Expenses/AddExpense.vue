@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3">
           <label for="amount" class="form-label">Status</label>
-          <select class="form-select" aria-label="Default select example" id="amount" v-model="expensesParams.status">
+          <select class="form-select" aria-label="Default select example" id="amount" v-model="expensesParams.status" required>
             <option selected value="0">Select Method</option>
             <option value="1">Income</option>
             <option value="2">Expense</option>

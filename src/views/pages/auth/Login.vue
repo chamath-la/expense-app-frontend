@@ -1,6 +1,6 @@
 <template>
-    <div class="login-container d-flex justify-content-center align-items-center">
-      <div class="card login-card">
+    <div class="login-container d-flex justify-content-center align-items-center w-100 h-100">
+      <div class="card login-card border-0">
         <div class="card-body">
           <h3 class="card-title text-center">Login</h3>
             <ErrorMessage :message = errorMessage />
@@ -24,7 +24,7 @@
     </div>
   </template>
   <script setup lang="ts">
-    import {ref} from 'vue';
+    import {ref , onMounted} from 'vue';
     import type { UserDetails } from '@/assets/types/UserDetails';
     import { UserModule} from '@/stores/UserModule';
     import getErrorMessage from '@/utils/errorHandler';
@@ -46,7 +46,7 @@
             UserStore.userDetails = loginParams.value;
             let result:any = await UserStore.login();
             localStorage.setItem('token',result.data);
-            router.push({name:'dashboard'});
+            router.push({name:'basiclayout'});
 
         }catch(error){
 
@@ -59,6 +59,6 @@
         }
        
     }
-
+    onMounted(() => {(localStorage.getItem('token')) ? router.push({name:'basiclayout'}) : router.push({name:'login'});});
 
 </script>

@@ -4,21 +4,17 @@
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">Expense App</router-link>
         <div class="navbar-nav ms-auto">
-          <router-link class="nav-item nav-link" to="/" exact>
+          <router-link class="nav-item nav-link" to="/dashboard" exact>
             <i class="bi bi-house d-lg-none me-2"></i>
-            <span class="d-none d-lg-inline">Home</span>
-          </router-link>
-          <router-link class="nav-item nav-link" to="/dashboard">
-            <i class="bi bi-bar-chart d-lg-none me-2"></i>
             <span class="d-none d-lg-inline">Dashboard</span>
           </router-link>
           <router-link class="nav-item nav-link" to="/expenses">
             <i class="bi bi-receipt d-lg-none me-2"></i>
             <span class="d-none d-lg-inline">Expenses</span>
           </router-link>
-          <router-link class="nav-item nav-link" to="/settings">
-            <i class="bi bi-gear d-lg-none me-2"></i>
-            <span class="d-none d-lg-inline">Settings</span>
+          <router-link class="nav-item nav-link" to="/logout">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            <span class="d-none d-lg-inline">Log Out</span>
           </router-link>
         </div>
       </div>

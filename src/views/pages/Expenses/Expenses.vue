@@ -1,39 +1,23 @@
-<template>
-    <div class="container mt-4">
 
-      <button @click="navigateToAddExpense" class="btn btn-primary mb-3 btn-sm"> <i class="bi bi-plus"></i></button>
-      <ErrorMessage :message = errorMessage />
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">I/E</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="expense in expenses" key="expense.id">
-            <td>{{ expense.date }}</td>
-            <td>{{ expense.description }}</td>
-            <td>{{ expense.amount.toFixed(2)}}</td>
-            <td>
-              {{ convert(parseInt(expense.status)) }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <template>
+    <div>
+      <div class="accordion mt-5 mx-2" id="expenseAccordion">
+        <button @click="navigateToAddExpense" class="btn btn-primary mb-3 btn-sm"> <i class="bi bi-plus"></i></button>
+        <ExpensesList v-for="expense in expenses" key="expense.id" :expense="expense" />
+      </div>
     </div>
   </template>
+  
+ 
   <script setup lang="ts">
   
 import router from '@/router';
 import {ref, onMounted } from 'vue';
 import { ExpenseModule} from '@/stores/ExpenseModule';
 import type { ExpensesParams } from '@/assets/types/ExpensesParams';
-import convert from '@/composables/ConvertMethod';
+
 import getErrorMessage from '@/utils/errorHandler';
-import ErrorMessage from '@/components/Alerts/ErrorMessage.vue';
+import ExpensesList from '@/components/ExpensesList.vue';
 
 const ExpenseStore = ExpenseModule();
 const expenses = ref<Array<ExpensesParams>>([]);

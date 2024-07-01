@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes';
+import {RouterModule} from '@/stores/RouterModule';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,13 @@ const isAuthenticated = () => {
 };
 
 router.beforeEach((to, from, next) => {
+
+  const RouteStore = RouterModule();
+  if(from.fullPath)
+    {
+      RouteStore.addRoute(from.fullPath);
+    }
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated()) {
       next({

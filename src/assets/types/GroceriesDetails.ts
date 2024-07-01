@@ -1,5 +1,6 @@
 export interface GroceriesDetails{
     id:Number,
     name:String,
-    amount:Number
+    amount:Number,
+    checked:boolean
 }

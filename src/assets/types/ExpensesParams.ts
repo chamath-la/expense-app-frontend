@@ -4,5 +4,6 @@ export interface ExpensesParams{
     description:String,
     amount:Number,
     status:number,
-    name?:string
+    name?:string,
+    quantity?:0
 }

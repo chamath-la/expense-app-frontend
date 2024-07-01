@@ -3,7 +3,7 @@
        
        <div class="d-flex justify-content-between">
         <h1><i class="bi bi-bookmark-star"></i></h1>   
-        <router-link to="/expenses"> <button class="btn btn-sm btn-primary text-center"><i class="bi bi-arrow-bar-left" style="height:2rem"></i></button> </router-link>
+        <router-link :to="RouteHistory"> <button class="btn btn-sm btn-primary text-center"><i class="bi bi-arrow-bar-left" style="height:2rem"></i></button> </router-link>
        </div> 
        <ErrorMessage :message = errorMessage />
        <SucessMessage :message="successMessage" />
@@ -20,9 +20,13 @@
           <label for="description" class="form-label">Description</label>
           <input type="text" id="description" v-model="expensesParams.description" class="form-control" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-3" v-if="RouteHistory !== '/'">
           <label for="amount" class="form-label">Amount</label>
           <input type="number" id="amount" v-model="expensesParams.amount" class="form-control" required>
+        </div>
+        <div class="mb-3" v-if="RouteHistory === '/'">
+          <label for="amount" class="form-label">Quantity</label>
+          <input type="number" id="amount" v-model="expensesParams.quantity" class="form-control" required>
         </div>
         <div class="mb-3">
           <label for="amount" class="form-label">Status</label>
@@ -30,6 +34,7 @@
             <option selected value="0">Select Method</option>
             <option value="1">Income</option>
             <option value="2">Expense</option>
+            <option value="3" v-if="RouteHistory === '/'">Grocery Expenses</option>
           </select>
         </div>
         <div class="d-flex justify-content-center justify-content-lg-end">
@@ -39,13 +44,14 @@
     </div>
   </template>
   <script setup lang="ts">
-  import {ref} from 'vue';
+  import {ref, onMounted} from 'vue';
 import type { ExpensesParams } from '@/assets/types/ExpensesParams';
 import { ExpenseModule} from '@/stores/ExpenseModule';
 import getErrorMessage from '@/utils/errorHandler';
 import ErrorMessage from '@/components/Alerts/ErrorMessage.vue';
 import SucessMessage from '@/components/Alerts/SuccessMessage.vue';
 import SubmitButton from '@/components/Buttons/SubmitButton.vue';
+import {RouterModule} from '@/stores/RouterModule';
 
 const ExpenseStore = ExpenseModule();
 const expensesParams = ref<ExpensesParams>({
@@ -53,11 +59,14 @@ const expensesParams = ref<ExpensesParams>({
         'name':'',
         'description':'',
         'amount':0,
-        'status':0
+        'status':0,
+        'quantity':0
     });
 const errorMessage = ref();
 const successMessage =ref();
 const SubmitData = ref<boolean>(false);
+const RouteStore = RouterModule();
+const RouteHistory = ref<string>('');
 
 const submitExpense = async() =>
 {
@@ -81,4 +90,12 @@ const submitExpense = async() =>
       SubmitData.value = false;
     }
 }
+
+onMounted(() => {
+  if(RouteStore.history)
+  {
+    RouteHistory.value = RouteStore.history;
+  }
+  
+})
 </script>

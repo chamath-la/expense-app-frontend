@@ -2,23 +2,29 @@
     <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Item</th>
-              <th scope="col">Amount</th>
+              <th><CheckBox /></th>
+              <th scope="col" class="text-center">Item</th>
+              <th scope="col" class="text-center">Amount</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in props.tableValues" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.amount }}</td>
+              <td><CheckBox  :id="item.id" :checked="item.checked"/></td>
+              <td class="text-center">{{ item.name }}</td>
+              <td class="text-end">{{ item.amount }}</td>
             </tr>
           </tbody>
         </table>
 </template>
 <script setup lang="ts">
+import CheckBox from '@/components/Buttons/CheckBox.vue';
+import type {GroceriesDetails } from '@/assets/types/GroceriesDetails';
+import type { PropType } from 'vue';
+
 const props = defineProps({
         tableValues:{
-            'type':Object,
-            default:{}
+            type:Array as PropType<GroceriesDetails[]>,
+            default:() => []
         },
     
 });

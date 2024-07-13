@@ -8,8 +8,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in props.tableValues" :key="item.id">
-              <td><CheckBox  :id="item.id" :checked="item.checked"/></td>
+            <tr v-for="item in props.tableValues" :key="String(item.id)">
+              <td><CheckBox  :id="String(item.id)" :checked="item.checked"/></td>
               <td class="text-center">{{ item.name }}</td>
               <td class="text-end">{{ item.amount }}</td>
             </tr>

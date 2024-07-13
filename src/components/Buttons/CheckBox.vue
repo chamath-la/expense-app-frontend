@@ -1,5 +1,5 @@
 <template>
-    <input class="form-check-input" type="checkbox" :id="props.id" @click="checkStatus" :checked="props.checked">
+    <input class="form-check-input" type="checkbox" :id="String(props.id)" @click="checkStatus" :checked="props.checked">
   <label class="form-check-label" for="flexCheckDefault">
     {{ props.Label }}
   </label>
@@ -16,7 +16,7 @@ import {ref, computed} from 'vue';
             default:''
         },
         id:{
-            type:Number,
+            type:String,
             default:0
         },
         checked:{
